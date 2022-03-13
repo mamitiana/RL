@@ -21,7 +21,7 @@ class Environement:
             raise Exception("Game is over")
         
         self.steps_left-=1
-        return random(s)
+        return random()
 
 
 class Agent:
