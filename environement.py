@@ -1,4 +1,4 @@
-from random import randint, random
+from random import choice, random
 from re import S
 from typing import List
 
@@ -21,4 +21,22 @@ class Environement:
             raise Exception("Game is over")
         
         self.steps_left-=1
-        return random.random()
+        return random(s)
+
+
+class Agent:
+    def __init__(self) -> None:
+        self.total_reward = 0.0
+
+    def step(self, env : Environement):
+        current_obs = env.get_observation()
+        actions   = env.get_actions()
+        reward = env.action( choice(actions) )
+        self.total_reward+= reward
+
+if __name__=="__main__":
+    env = Environement()
+    agent = Agent()
+    while not env.is_done():
+        agent.step(env)
+    print(" Total reward got : %.4f  " %agent.total_reward)
